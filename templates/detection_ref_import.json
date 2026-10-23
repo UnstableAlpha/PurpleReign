@@ -1,0 +1,14 @@
+[
+  {
+    "id": "T1566.999",
+    "name": "Phishing: Example Sub-Technique",
+    "tactics": "Initial Access",
+    "detectionLogic": "process_creation: winword.exe|excel.exe spawning cmd.exe|powershell.exe|wscript.exe | ALSO: email_gateway: attachment with macro-enabled extension (.docm|.xlsm) from external sender | CORRELATE: email receipt + macro execution within 60s = phishing execution chain"
+  },
+  {
+    "id": "T1059.999",
+    "name": "Command and Scripting Interpreter: Example",
+    "tactics": "Execution",
+    "detectionLogic": "process_creation: powershell.exe with -enc|-encodedcommand flag | ALSO: script_block EID 4104: decoded content matching known obfuscation pattern | CORRELATE: encoded PowerShell + AMSI detection = obfuscated execution attempt"
+  }
+]

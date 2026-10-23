@@ -1,0 +1,11 @@
+# PurpleReign Test Case Import Template
+# Lines beginning with # are ignored.
+# Required fields: tactic, id, name
+# All other fields are optional.
+tactic,id,name,description,tools,steps,expectedDetection,logSource,notes
+Initial Access,T1566.001,Spearphishing Attachment,Send a malicious attachment to a target user to gain initial access.,Metasploit;GoPhish,"1. Craft a malicious document with embedded macro
+2. Send via email to target mailbox
+3. Confirm delivery and document open",Alert on suspicious child process spawned from Office application,Windows Security Event Log;Microsoft Defender for Endpoint,Validate against email gateway controls
+Execution,T1059.001,PowerShell Execution,Execute encoded PowerShell command to download and run a payload.,PowerShell,"1. Open elevated PowerShell prompt
+2. Run: powershell -enc <base64payload>
+3. Confirm reverse shell established",Alert on PowerShell with encoded command or download cradle,Sysmon Event ID 1;PowerShell Script Block Logging,Test both constrained and unconstrained language mode

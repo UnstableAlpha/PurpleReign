@@ -1,0 +1,14 @@
+[
+  {
+    "id": "T1566.001",
+    "name": "Phishing: Spearphishing Attachment",
+    "tactics": "Initial Access",
+    "detectionLogic": "process_name in ('WINWORD.EXE','EXCEL.EXE') AND child_process_name in ('cmd.exe','powershell.exe','wscript.exe') | EventID=4688 AND ParentImage=*Office* AND Image=*powershell*"
+  },
+  {
+    "id": "T1059.001",
+    "name": "Command and Scripting Interpreter: PowerShell",
+    "tactics": "Execution",
+    "detectionLogic": "process_name='powershell.exe' AND (command_line CONTAINS '-enc' OR command_line CONTAINS 'IEX' OR command_line CONTAINS 'DownloadString') | ScriptBlockLogging EventID=4104 with suspicious keywords"
+  }
+]

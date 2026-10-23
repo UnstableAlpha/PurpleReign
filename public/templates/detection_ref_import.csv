@@ -1,0 +1,7 @@
+# PurpleReign Detection Reference Import Template
+# Lines beginning with # are ignored.
+# Required fields: id, detectionLogic
+# All other fields are optional.
+id,name,tactics,detectionLogic
+T1566.001,Phishing: Spearphishing Attachment,Initial Access,process_name in ('WINWORD.EXE','EXCEL.EXE') AND child_process_name in ('cmd.exe','powershell.exe','wscript.exe') | EventID=4688 AND ParentImage=*Office* AND Image=*powershell*
+T1059.001,Command and Scripting Interpreter: PowerShell,Execution,process_name='powershell.exe' AND (command_line CONTAINS '-enc' OR command_line CONTAINS 'IEX' OR command_line CONTAINS 'DownloadString') | ScriptBlockLogging EventID=4104 with suspicious keywords

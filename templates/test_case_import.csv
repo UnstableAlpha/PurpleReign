@@ -1,0 +1,17 @@
+# PurpleReign — Test Case Import Template
+# Lines beginning with # are ignored.
+# Required columns: tactic, id, name
+# All other columns are optional but recommended.
+# For multi-line fields (steps, description), wrap the value in double-quotes.
+# Tactic must match one of the 12 MITRE ATT&CK tactics used in the app, or a new tactic will be created.
+tactic,id,name,description,tools,steps,expectedDetection,logSource,notes
+Initial Access,T1566.999,Phishing: Example Sub-Technique,Simulate a spear-phishing email with a malicious attachment to test email gateway and endpoint detection.,"GoPhish; custom Python script; Cobalt Strike Phishing module","1. Create a test phishing email with a benign macro-enabled .docx file.
+2. Send to a consented test mailbox.
+3. Open the attachment and enable macros.
+4. Observe process creation and network callbacks.
+5. Verify detection via email gateway alert and EDR macro execution alert.","Email gateway: attachment blocked or quarantined. EDR: macro execution spawning child process (winword.exe -> cmd.exe or powershell.exe). Alert: office macro spawning shell process.","Email gateway log; Sysmon EID 1 (child process of winword.exe); Windows Security EID 4688; EDR macro alert","Test only — do not use production mailboxes."
+Execution,T1059.999,Command and Scripting Interpreter: Example,Execute a benign payload via PowerShell to test script-block logging and AMSI detection.,"PowerShell (native); AMSI test script","1. Open PowerShell as a standard user.
+2. Run Invoke-Expression with a benign Base64-encoded payload.
+3. Observe ScriptBlock logging in Windows PowerShell event log.
+4. Attempt AMSI bypass technique (safe PoC only).
+5. Verify detection: EID 4104 script block logged; AMSI alert triggered.","EID 4104: script block logging captures encoded/decoded payload. AMSI: detection of obfuscated or known-bad string pattern. Alert: PowerShell encoded command execution by non-admin user.","Windows PowerShell EID 4104 (script block log); Sysmon EID 1 (powershell.exe -enc); AMSI provider log",

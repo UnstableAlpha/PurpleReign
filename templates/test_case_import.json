@@ -1,0 +1,24 @@
+[
+  {
+    "tactic": "Initial Access",
+    "id": "T1566.999",
+    "name": "Phishing: Example Sub-Technique",
+    "description": "Simulate a spear-phishing email with a malicious attachment to test email gateway and endpoint detection.",
+    "tools": "GoPhish; custom Python script; Cobalt Strike Phishing module",
+    "steps": "1. Create a test phishing email with a benign macro-enabled .docx file.\n2. Send to a consented test mailbox.\n3. Open the attachment and enable macros.\n4. Observe process creation and network callbacks.\n5. Verify detection via email gateway alert and EDR macro execution alert.",
+    "expectedDetection": "Email gateway: attachment blocked or quarantined. EDR: macro execution spawning child process (winword.exe -> cmd.exe or powershell.exe). Alert: office macro spawning shell process.",
+    "logSource": "Email gateway log; Sysmon EID 1 (child process of winword.exe); Windows Security EID 4688; EDR macro alert",
+    "notes": "Test only — do not use production mailboxes."
+  },
+  {
+    "tactic": "Execution",
+    "id": "T1059.999",
+    "name": "Command and Scripting Interpreter: Example",
+    "description": "Execute a benign payload via PowerShell to test script-block logging and AMSI detection.",
+    "tools": "PowerShell (native); AMSI test script",
+    "steps": "1. Open PowerShell as a standard user.\n2. Run Invoke-Expression with a benign Base64-encoded payload.\n3. Observe ScriptBlock logging in Windows PowerShell event log.\n4. Attempt AMSI bypass technique (safe PoC only).\n5. Verify detection: EID 4104 script block logged; AMSI alert triggered.",
+    "expectedDetection": "EID 4104: script block logging captures encoded/decoded payload. AMSI: detection of obfuscated or known-bad string pattern. Alert: PowerShell encoded command execution by non-admin user.",
+    "logSource": "Windows PowerShell EID 4104 (script block log); Sysmon EID 1 (powershell.exe -enc); AMSI provider log",
+    "notes": null
+  }
+]

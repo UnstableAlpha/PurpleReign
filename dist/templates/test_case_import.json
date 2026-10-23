@@ -1,0 +1,24 @@
+[
+  {
+    "tactic": "Initial Access",
+    "id": "T1566.001",
+    "name": "Spearphishing Attachment",
+    "description": "Send a malicious attachment to a target user to gain initial access.",
+    "tools": "Metasploit;GoPhish",
+    "steps": "1. Craft a malicious document with embedded macro\n2. Send via email to target mailbox\n3. Confirm delivery and document open",
+    "expectedDetection": "Alert on suspicious child process spawned from Office application",
+    "logSource": "Windows Security Event Log;Microsoft Defender for Endpoint",
+    "notes": "Validate against email gateway controls"
+  },
+  {
+    "tactic": "Execution",
+    "id": "T1059.001",
+    "name": "PowerShell Execution",
+    "description": "Execute encoded PowerShell command to download and run a payload.",
+    "tools": "PowerShell",
+    "steps": "1. Open elevated PowerShell prompt\n2. Run: powershell -enc <base64payload>\n3. Confirm reverse shell established",
+    "expectedDetection": "Alert on PowerShell with encoded command or download cradle",
+    "logSource": "Sysmon Event ID 1;PowerShell Script Block Logging",
+    "notes": "Test both constrained and unconstrained language mode"
+  }
+]

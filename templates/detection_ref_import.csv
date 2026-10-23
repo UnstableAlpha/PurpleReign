@@ -1,0 +1,10 @@
+# PurpleReign — Detection Reference Import Template
+# Lines beginning with # are ignored.
+# Required columns: id, detectionLogic
+# Optional columns: name, tactics
+# detectionLogic entries should be separated by " | " (space-pipe-space) — the app splits on this delimiter
+#   to display each logic rule as a separate block in the UI.
+# If an id already exists in the dataset, the record will be updated (overwritten).
+id,name,tactics,detectionLogic
+T1566.999,Phishing: Example Sub-Technique,Initial Access,process_creation: winword.exe|excel.exe spawning cmd.exe|powershell.exe|wscript.exe | ALSO: email_gateway: attachment with macro-enabled extension (.docm|.xlsm) from external sender | CORRELATE: email receipt + macro execution within 60s = phishing execution chain
+T1059.999,Command and Scripting Interpreter: Example,Execution,process_creation: powershell.exe with -enc|-encodedcommand flag | ALSO: script_block EID 4104: decoded content matching known obfuscation pattern | CORRELATE: encoded PowerShell + AMSI detection = obfuscated execution attempt
